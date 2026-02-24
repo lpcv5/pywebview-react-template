@@ -11,8 +11,8 @@ A desktop application template using **pywebview** for the native window and **R
 ## Setup
 
 ```bash
-# Install frontend dependencies
-npm install
+# Install frontend dependencies (npm, bun, yarn, or pnpm all work)
+npm install   # or: bun install / yarn install / pnpm install
 
 # Install Python dependencies (requires uv: https://docs.astral.sh/uv/)
 uv sync
@@ -20,14 +20,14 @@ uv sync
 
 ## Development
 
-Run two terminals:
+Single command (like `tauri dev`):
 
 ```bash
-# Terminal 1: Vite dev server
-npm run dev
-
-# Terminal 2: pywebview window
-npm run pywebview
+npm run dev:app
+# or with a different package manager:
+uv run python dev.py --pm bun
+uv run python dev.py --pm yarn
+uv run python dev.py --pm pnpm
 ```
 
 ## Production

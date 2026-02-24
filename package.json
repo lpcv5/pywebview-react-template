@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:app": "uv run python dev.py",
+    "dev:app": "uv run python dev.py --pm npm",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

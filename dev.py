@@ -19,14 +19,27 @@ def wait_for_vite(url: str, timeout: int = 30) -> bool:
 
 
 def main() -> None:
-    dev_url = "http://localhost:5173"
+    import argparse
+    import os
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--pm",
+        default=os.environ.get("npm_execpath", "npm").split("\\")[-1].split("/")[-1].replace(".js", "").replace(".cmd", "") or "npm",
+        help="Package manager to use: npm, bun, yarn, pnpm (default: npm)",
+    )
+    parser.add_argument("--dev-url", default="http://localhost:5173")
+    args = parser.parse_args()
+
+    dev_url = args.dev_url
+    pm = args.pm
 
     # 1. Start Vite in the background
     vite = subprocess.Popen(
-        ["npm", "run", "dev"],
+        [pm, "run", "dev"],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
-        shell=True,
+        shell=(sys.platform == "win32"),
     )
 
     try:

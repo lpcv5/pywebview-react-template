@@ -2,11 +2,12 @@
 
 import platform
 import subprocess
+import sys
 
 
 def run(cmd: list[str]) -> None:
     print(f">>> {' '.join(cmd)}")
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, shell=(sys.platform == "win32"))
 
 
 def main() -> None:
@@ -25,6 +26,7 @@ def main() -> None:
         "--enable-plugin=pywebview",
         "--include-data-dir=dist=dist",
         "--output-dir=build",
+        "--assume-yes-for-downloads",
     ]
 
     system = platform.system()
